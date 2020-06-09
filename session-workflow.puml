@@ -1,0 +1,14 @@
+@startuml session_workflow
+actor client
+participant server
+participant datastore
+
+client -> server : send credentials
+server -> server : verify credentials
+server -> datastore : create session
+server -> client : send session ID cookie
+client -> client : store session ID cookie
+client -> server : api request (with cookie)
+server -> datastore : verify cookie and session 
+server -> client : respond to request
+@enduml
